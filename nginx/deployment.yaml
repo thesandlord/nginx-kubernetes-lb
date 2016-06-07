@@ -12,23 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: reverse-rc
+  name: nginxplus
 spec:
-  replicas: 3
-  selector:
-    name: reverse-pods
+  replicas: 1
   template:
     metadata:
       labels:
-        name: reverse-pods
+        name: nginxplus-pods
     spec:
       containers:
       - image: <CONTAINER>
-        name: reverse-container
+        name: nginxplus-container
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
-          name: http-server
+          - name: http
+            containerPort: 80
+          - name: http-alt
+            containerPort: 8080

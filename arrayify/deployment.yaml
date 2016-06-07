@@ -12,22 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: upper-rc
+  name: arrayify
 spec:
   replicas: 3
-  selector:
-    name: upper-pods
   template:
     metadata:
       labels:
-        name: upper-pods
+        name: arrayify-pods
     spec:
       containers:
       - image: <CONTAINER>
-        name: upper-container
+        name: arrayify-container
         imagePullPolicy: Always
         ports:
         - containerPort: 80

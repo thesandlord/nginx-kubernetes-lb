@@ -12,25 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: nginxplus-rc
+  name: upper
 spec:
-  replicas: 1
-  selector:
-    name: nginxplus-pods
+  replicas: 3
   template:
     metadata:
       labels:
-        name: nginxplus-pods
+        name: upper-pods
     spec:
       containers:
       - image: <CONTAINER>
-        name: nginxplus-container
+        name: upper-container
         imagePullPolicy: Always
         ports:
-          - name: http
-            containerPort: 80
-          - name: http-alt
-            containerPort: 8080
+        - containerPort: 80
+          name: http-server

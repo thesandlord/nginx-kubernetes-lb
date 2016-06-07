@@ -32,7 +32,6 @@ push:
 	gcloud docker push $(TAG)
 
 deploy: build push
-	-kubectl delete rc $(NAME)-rc
 	-kubectl delete svc $(NAME)
-	-sed -e 's~<CONTAINER>~$(TAG)~g' rc.yaml | kubectl create -f -
+	-sed -e 's~<CONTAINER>~$(TAG)~g' deployment.yaml | kubectl apply -f -
 	-kubectl create -f svc.yaml

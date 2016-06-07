@@ -34,6 +34,5 @@ push:
 deploy: build push only-deploy
 
 only-deploy:
-	-kubectl delete rc $(NAME)-rc
-	-sed -e 's~<CONTAINER>~$(TAG)~g' nginxplus-rc.yaml | kubectl create -f -
+	-sed -e 's~<CONTAINER>~$(TAG)~g' deployment.yaml | kubectl apply -f -
 	-kubectl create -f svc.yaml
